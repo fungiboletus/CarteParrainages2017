@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Carte des parrainages - Élections françaises 2017</title>
+
+   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.1/awesomplete.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/2.6.1/fuse.min.js"></script>
+
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi" />
+
+    <script src="PruneCluster.js"></script>
+
+    <script src="awesomplete.js"></script>
+    <link rel="stylesheet" href="PruneCluster.css"/>
+	<link rel="stylesheet" href="style.css"/>
+
+    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+</head>
+<body>
+<h1>Carte des parrainages du 10 mars 2017 - Élection présidentielle française de 2017</h1>
+<div id="map"></div>
+<input id="search-input" tabindex="1" placeholder="Recherchez un candidat ou un parrainage" type="text"/>
+<p id="suggestions">
+    <strong><a href="#" id="clear">Effacer recherche</a></strong>
+</p>
+</body>
+</html>

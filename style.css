@@ -1,0 +1,111 @@
+html, body, #map {
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: #3e587e;
+
+    font-family: 'Roboto', sans-serif;
+
+}
+
+h2.nom {
+	margin-bottom:0.1em;
+}
+.leaflet-popup-content p {
+	margin-top:0.75em;
+	margin-bottom:0.75em;
+}
+
+div.awesomplete {
+	position: absolute;
+	left: 55px;
+	top: 10px;
+	right: 10%;
+	z-index: 10000;
+}
+
+.awesomplete input {
+	width: 80%;
+	padding: 0.3em 0.8em;
+	border: 0;
+	background: white;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65), .05em .1em .3em rgba(0,0,0,.3) inset;
+	border-radius: 4px;
+}
+
+div.awesomplete .candidat mark {
+	background: transparent;
+}
+
+div.awesomplete > ul > li[aria-selected="true"] {
+	background: #3d6c8e !important;
+}
+
+h1 {
+	position: absolute;
+	z-index: 10000;
+	color: white;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+	bottom: 25px;
+	left: 40px;
+	background: #f90000;
+	background: #f90000cc;
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	padding: 7px 14px;
+	font-size: 20px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+}
+
+
+#suggestions {
+position: absolute;
+z-index: 9990;
+top: 29px;
+left: 55px;
+color: #fff;
+background: #3e587e;
+border-radius: 4px;
+font-size: 12px;
+padding: 3px 8px;
+	width: 70%;
+}
+
+
+#suggestions a {
+	color:white;
+}
+#suggestions a:hover {
+	color:#f90000;
+}
+
+#loadingText {
+	color:#333;
+position: absolute;
+z-index: 10000;
+left: 0;
+right: 0;
+top: 50%;
+margin-top:-1em;
+font-size: 50px;
+text-align: center;
+background: rgba(255,255,255,0.666);
+padding: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+	h1 {
+		font-size: 14px;
+		padding: 4px 10px;
+		bottom: 50px;
+	}
+	#suggestions {
+		top:26px;
+		font-size:10px;
+		width:auto;
+		right:40px;
+	}
+}
