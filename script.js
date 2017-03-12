@@ -295,7 +295,9 @@ $(document).ready(function() {
     }).addTo(map);
 
     L.control.attribution({
-    	prefix: '<a href="https://twitter.com/yellowiscool"> Antoine Pultier</a> | '+
+    	prefix: 
+    	'<a href="https://github.com/yellowiscool/CarteParrainages2017">Sources</a> | ' +
+    	'<a href="https://twitter.com/yellowiscool"> Antoine Pultier</a> | '+
     	'<a href="http://mapbox.com/">MapBox</a> | '+
     	'<a href="https://github.com/SINTEF-9012/PruneCluster">PruneCluster</a> | ' +
     	'© <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors | '+
