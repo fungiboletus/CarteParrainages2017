@@ -228,6 +228,32 @@ $(document).ready(function() {
         zoomControl: true
     }).setView(defaultView, defaultZoom);
 
+    map.oldFitBounds = map.fitBounds;
+	var paddingBottomRight = new L.Point(20, 20),
+		paddingTopLeft = new L.Point(20, 20);
+	map.fitBounds = (bounds, options) => {
+		if (!options) {
+			options = {
+				paddingBottomRight: paddingBottomRight,
+				paddingTopLeft: paddingTopLeft
+			};
+		} else {
+			if (!options.paddingTopLeft) {
+				options.paddingTopLeft = paddingTopLeft;
+			}
+			if (!options.paddingBottomRight) {
+				options.paddingBottomRight = paddingBottomRight;
+			}
+		}
+		map.oldFitBounds(bounds, options);
+		return this;
+	};
+
+	$(window).resize(function(){
+		paddingTopLeft.y = $('#suggestions') + 50;
+		paddingBottomRight.y = $('h1').height() + 40;
+	});
+
     //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/apultier.2e8rr2gy/{z}/{x}/{y}.png', {
         detectRetina: true,
@@ -351,9 +377,7 @@ $(document).ready(function() {
 				}
 				leafletView.ProcessView();
 				//map.setView(defaultView, defaultZoom);
-				map.fitBounds(bounds, {
-					padding: [100, 100]
-				});
+				map.fitBounds(bounds);
 			}
 			// If it's a candidate
 			else if (categoriesCandidats.hasOwnProperty(name)) {
