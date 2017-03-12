@@ -283,7 +283,7 @@ $(document).ready(function() {
 
 	var setMargin = function(){
 		paddingTopLeft.y = $('#suggestions').height() + 50;
-		paddingBottomRight.y = $('h1').height() + 40;
+		paddingBottomRight.y = $('h1').height() + 50;
 	};
 	console.log(paddingTopLeft);
 	$(window).resize(setMargin);
