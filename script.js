@@ -77,8 +77,8 @@ var colours = [
 	'#54a0d4',
 	// François Fillon le rebel (bleu marine)
 	'#23408f',
-	// Benoît Hamont (vert clair. Seconde couleur, le rouge étant populaire)
-	'#97c121',
+	// Benoît Hamont (vert clair. Seconde couleur, le rouge étant populaire) test en rose
+	'#eb1e4f',
 	// Marine Le Pen (bleu marine comme Fillon :) )
 	'#253081',
 	// Emmanuel Macron (rose ou bleu clair, choix difficile => bleu clair après remarques utilisateurs)
