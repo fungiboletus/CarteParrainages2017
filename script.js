@@ -263,7 +263,7 @@ $(document).ready(function() {
     map.oldFitBounds = map.fitBounds;
 	var paddingBottomRight = new L.Point(20, 20),
 		paddingTopLeft = new L.Point(20, 20);
-	map.fitBounds = (bounds, options) => {
+	map.fitBounds = function(bounds, options){
 		if (!options) {
 			options = {
 				paddingBottomRight: paddingBottomRight,
@@ -281,10 +281,12 @@ $(document).ready(function() {
 		return this;
 	};
 
-	$(window).resize(function(){
-		paddingTopLeft.y = $('#suggestions') + 50;
+	var setMargin = function(){
+		paddingTopLeft.y = $('#suggestions').height() + 50;
 		paddingBottomRight.y = $('h1').height() + 40;
-	});
+	};
+	console.log(paddingTopLeft);
+	$(window).resize(setMargin);
 
     //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     L.tileLayer('https://{s}.tiles.mapbox.com/v3/apultier.2e8rr2gy/{z}/{x}/{y}.png', {
@@ -322,11 +324,10 @@ $(document).ready(function() {
         iconsCandidats[candidatName] = e;
         //iconsCandidats.push(e);
     }
-    for (var i = 0; i < colours.length; ++i) {
-    }
-
     var popupOptions = {
-		offset: L.point(0, -8)
+		offset: L.point(0, -8),
+		autoPanPaddingTopLeft: paddingTopLeft,
+		autoPanPaddingBottomRight: paddingBottomRight,
 	};
 
     var markers = [];
@@ -565,6 +566,7 @@ $(document).ready(function() {
 
 		suggestions.style.display='block';
 		$(loadingText).remove();
+		setMargin();
     });
 });
 
