@@ -87,17 +87,49 @@ var colours = [
 	'#c9462c'];
 var pi2 = Math.PI * 2;
 
- var textCandidats = [
-  ' ',
-  'NA',
-  'AF',
-  'NDA',
-  'FF',
-  'BH',
-  'MLP',
-  'EM',
-  'JLM'
- ];
+var textCandidats = {
+	"ALLIOT-MARIE Michèle": "MAM",
+	"ARTHAUD Nathalie": "NA",
+	"ASSELINEAU François": "FA",
+	"BAROIN François": "FB",
+	"CAMUS Renaud": "RC",
+	"CHEMINADE Jacques": "JC",
+	"DE PREVOISIN Robert": "RDP",
+	"DELAFON Olivier": "OD",
+	"DUPONT-AIGNAN Nicolas": "NDA",
+	"FAUDOT Bastien": "BF",
+	"FESSARD DE FOUCAULT Bertrand": "BFF",
+	"FILLON François": "FF",
+	"GORGES Jean-Pierre": "JPG",
+	"GOUE Michaël": "MG",
+	"GUAINO Henri": "HG",
+	"GUYOT Stéphane": "SG",
+	"HAMON Benoît": "BH",
+	"JADOT Yannick": "YJ",
+	"JARDIN Alexandre": "AJA",
+	"JUPPE Alain": "AJ",
+	"LARROUTUROU Pierre": "PL",
+	"LASSALLE Jean": "JL",
+	"LE PEN Marine": "MLP",
+	"MACRON Emmanuel": "EM",
+	"MARCHANDISE Charlotte": "CM",
+	"MARTINEZ Jean-Claude": "JCM",
+	"MELENCHON Jean-Luc": "JLM",
+	"MIGUET Nicolas": "NM",
+	"MILLO Jean-Luc": "JM",
+	"MUMBACH Paul": "PM",
+	"NIKONOFF Jacques": "JN",
+	"POUTOU Philippe": "PP",
+	"REGIS Olivier": "OR",
+	"TAUZIN Didier": "DT",
+	"TEMARU Oscar": "OT",
+	"TONIUTTI Emmanuel": "ET",
+	"TRAMBOUZE Bernard": "BT",
+	"TROADEC Christian": "CT",
+	"VERGNE Michel": "MV",
+	"WAECHTER Antoine": "AW",
+	"YADE Rama": "RY"
+};
 
 L.Icon.MarkerCluster = L.Icon.extend({
     options: {
@@ -278,15 +310,19 @@ $(document).ready(function() {
     };
 
 
-    var iconsCandidats = [];
-    for (var i = 0; i < colours.length; ++i) {
+    var iconsCandidats = {};
+    for (var candidatName in categoriesCandidats) {
         var e = new L.Icon.MarkerCluster();
+        var category = categoriesCandidats[candidatName];
         e.stats = [0,0,0,0,0,0,0,0];
         e.population = 1
         e.hideClusterInfos = true;
-        e.candidatText = textCandidats[i];
-        e.stats[i] = 1;
-        iconsCandidats.push(e);
+        e.candidatText = textCandidats[candidatName];
+        e.stats[category] = 1;
+        iconsCandidats[candidatName] = e;
+        //iconsCandidats.push(e);
+    }
+    for (var i = 0; i < colours.length; ++i) {
     }
 
     var popupOptions = {
@@ -349,7 +385,7 @@ $(document).ready(function() {
         			{
 						popup: htmlPopup,
 						popupOptions: popupOptions,
-						icon: iconsCandidats[candidatCategory],
+						icon: iconsCandidats[candidatName],
 						candidat: candidatName,
 						name: name,
         			}
