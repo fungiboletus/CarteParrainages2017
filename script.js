@@ -80,7 +80,7 @@ var colours = [
 	// Benoît Hamont (vert clair. Seconde couleur, le rouge étant populaire) test en rose
 	'#eb1e4f',
 	// Marine Le Pen (bleu marine comme Fillon :) )
-	'#253081',
+	'#000042',
 	// Emmanuel Macron (rose ou bleu clair, choix difficile => bleu clair après remarques utilisateurs)
 	'#01b2fb',
 	// Jean-Luc Mélenchon (rouge pas trop agressif)
@@ -94,7 +94,7 @@ var pi2 = Math.PI * 2;
   'NDA',
   'FF',
   'BH',
-  'ML',
+  'MLP',
   'EM',
   'JLM'
  ];
