@@ -55,12 +55,14 @@ var importantCandidats = [
 	"MACRON Emmanuel",
 
 	"MELENCHON Jean-Luc",
-	
+
 	"CHEMINADE Jacques",
 	"JUPPE Alain",
 	"LASSALLE Jean",
 	"POUTOU Philippe",
-	"YADE Rama"
+	"YADE Rama",
+
+	"Autres"
 ];
 
 // Main colours from the candidates websites
@@ -337,8 +339,24 @@ $(document).ready(function() {
 
 		function filterMap(name) {
 			map.closePopup();
+			if (name === 'Autres') {
+				var bounds = new L.LatLngBounds();
+				// We only display the markers related to the candidate
+				for (var i = 0, l = markers.length; i < l; ++i) {
+					var isForCandidate = categoriesCandidats[markers[i].data.candidat] === 0;
+					markers[i].filtered = !isForCandidate;
+					if (isForCandidate) {
+						bounds.extend(new L.LatLng(markers[i].position.lat, markers[i].position.lng))
+					}
+				}
+				leafletView.ProcessView();
+				//map.setView(defaultView, defaultZoom);
+				map.fitBounds(bounds, {
+					padding: [100, 100]
+				});
+			}
 			// If it's a candidate
-			if (categoriesCandidats.hasOwnProperty(name)) {
+			else if (categoriesCandidats.hasOwnProperty(name)) {
 				var bounds = new L.LatLngBounds();
 				// We only display the markers related to the candidate
 				for (var i = 0, l = markers.length; i < l; ++i) {
@@ -462,9 +480,13 @@ $(document).ready(function() {
 
 		importantCandidats.forEach(function(candidat) {
 			var candidatButton = document.createElement("a");
-			candidatButton.setAttribute("href", "#");
 			candidatButton.appendChild(document.createTextNode(candidat));
-			candidatButton.style.background = colours[categoriesCandidats[candidat]];
+			candidatButton.setAttribute("href", "#");
+			if (candidat === 'Autres') {
+				candidatButton.style.background = colours[0];
+			} else {
+				candidatButton.style.background = colours[categoriesCandidats[candidat]];
+			}
 			candidatButton.addEventListener("click", function(e) {
 				e.preventDefault();
 				searchInput.value = candidat;
