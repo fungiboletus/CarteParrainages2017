@@ -467,9 +467,9 @@ $(document).ready(function() {
 						//console.log()
 					}
 				}
-				if (!candidateFound) {
+				/*if (!candidateFound) {
 					map.setView(defaultView, defaultZoom);
-				}
+				}*/
 				leafletView.ProcessView();
 			}
 
