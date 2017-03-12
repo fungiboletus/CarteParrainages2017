@@ -67,19 +67,24 @@ z-index: 9990;
 top: 29px;
 left: 55px;
 color: #fff;
-background: #3e587e;
-border-radius: 4px;
 font-size: 12px;
-padding: 3px 8px;
+padding: 3px 4px;
 	width: 70%;
 }
 
 
 #suggestions a {
-	color:white;
+	color: white;
+text-decoration: none;
+padding: 2px 4px;
+display: inline-block;
+margin: 1px 0px;
+background: black;
 }
 #suggestions a:hover {
-	color:#f90000;
+	color:#ddd;
+
+text-decoration: underline;
 }
 
 #loadingText {

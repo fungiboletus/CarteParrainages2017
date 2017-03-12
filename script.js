@@ -54,10 +54,11 @@ var importantCandidats = [
 	"LE PEN Marine",
 	"MACRON Emmanuel",
 
+	"MELENCHON Jean-Luc",
+	
 	"CHEMINADE Jacques",
 	"JUPPE Alain",
 	"LASSALLE Jean",
-	"MELENCHON Jean-Luc",
 	"POUTOU Philippe",
 	"YADE Rama"
 ];
@@ -65,7 +66,7 @@ var importantCandidats = [
 // Main colours from the candidates websites
 var colours = [
 	// Others (gris AirFrance)
-	'#333',
+	'#666',
 	// Nathalie Arthaud (Rouge évidemment)
 	'#c41114',
 	// Asselineau François (bleu vert)
@@ -78,8 +79,8 @@ var colours = [
 	'#97c121',
 	// Marine Le Pen (bleu marine comme Fillon :) )
 	'#253081',
-	// Emmanuel Macron (rose ou bleu clair, choix difficile => rose car moins utilisé)
-	'#ff3680',
+	// Emmanuel Macron (rose ou bleu clair, choix difficile => bleu clair après remarques utilisateurs)
+	'#01b2fb',
 	// Jean-Luc Mélenchon (rouge pas trop agressif)
 	'#c9462c'];
 var pi2 = Math.PI * 2;
@@ -351,7 +352,7 @@ $(document).ready(function() {
 				//map.setView(defaultView, defaultZoom);
 				console.log(bounds);
 				map.fitBounds(bounds, {
-					padding: [50, 50]
+					padding: [100, 100]
 				});
 			} else {
 				var candidateFound = false;
@@ -463,6 +464,7 @@ $(document).ready(function() {
 			var candidatButton = document.createElement("a");
 			candidatButton.setAttribute("href", "#");
 			candidatButton.appendChild(document.createTextNode(candidat));
+			candidatButton.style.background = colours[categoriesCandidats[candidat]];
 			candidatButton.addEventListener("click", function(e) {
 				e.preventDefault();
 				searchInput.value = candidat;
