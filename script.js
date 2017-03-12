@@ -81,8 +81,8 @@ var colours = [
 	'#eb1e4f',
 	// Marine Le Pen (bleu marine comme Fillon :) )
 	'#000042',
-	// Emmanuel Macron (rose ou bleu clair, choix difficile => bleu clair après remarques utilisateurs)
-	'#01b2fb',
+	// Emmanuel Macron (rose ou bleu clair, choix difficile => violet (mix bleu et rouge) après remarques utilisateurs)
+	'#bd008c',
 	// Jean-Luc Mélenchon (rouge pas trop agressif)
 	'#c9462c'];
 var pi2 = Math.PI * 2;
