@@ -4,7 +4,10 @@ var categoriesCandidats = {
 	"ARTHAUD Nathalie": 1,
 	"ASSELINEAU François": 2,
 	"BAROIN François": 0,
+	"BLANAL Jérôme": 0,
+	"BORLOO Jean-Louis": 0,
 	"CAMUS Renaud": 0,
+	"CAZENEUVE Bernard": 0,
 	"CHEMINADE Jacques": 0,
 	"DE PREVOISIN Robert": 0,
 	"DELAFON Olivier": 0,
@@ -15,8 +18,11 @@ var categoriesCandidats = {
 	"GORGES Jean-Pierre": 0,
 	"GOUE Michaël": 0,
 	"GUAINO Henri": 0,
+	"GUILBERT Jean-Paul": 0,
 	"GUYOT Stéphane": 0,
 	"HAMON Benoît": 5,
+	"HENART Laurent": 0,
+	"HOLLANDE François": 0,
 	"JADOT Yannick": 0,
 	"JARDIN Alexandre": 0,
 	"JUPPE Alain": 0,
@@ -27,10 +33,12 @@ var categoriesCandidats = {
 	"MARCHANDISE Charlotte": 0,
 	"MARTINEZ Jean-Claude": 0,
 	"MELENCHON Jean-Luc": 8,
+	"MESSAOUDI Kamel": 0,
 	"MIGUET Nicolas": 0,
 	"MILLO Jean-Luc": 0,
 	"MUMBACH Paul": 0,
 	"NIKONOFF Jacques": 0,
+	"PASSERIEUX Régis": 0,
 	"POUTOU Philippe": 0,
 	"REGIS Olivier": 0,
 	"TAUZIN Didier": 0,
@@ -92,7 +100,10 @@ var textCandidats = {
 	"ARTHAUD Nathalie": "NA",
 	"ASSELINEAU François": "FA",
 	"BAROIN François": "FB",
+	"BLANAL Jérôme": "JB",
+	"BORLOO Jean-Louis": "JLB",
 	"CAMUS Renaud": "RC",
+	"CAZENEUVE Bernard": "BC",
 	"CHEMINADE Jacques": "JC",
 	"DE PREVOISIN Robert": "RDP",
 	"DELAFON Olivier": "OD",
@@ -103,8 +114,11 @@ var textCandidats = {
 	"GORGES Jean-Pierre": "JPG",
 	"GOUE Michaël": "MG",
 	"GUAINO Henri": "HG",
+	"GUILBERT Jean-Paul": "JGU",
 	"GUYOT Stéphane": "SG",
 	"HAMON Benoît": "BH",
+	"HENART Laurent": "LH",
+	"HOLLANDE François": "FH",
 	"JADOT Yannick": "YJ",
 	"JARDIN Alexandre": "AJA",
 	"JUPPE Alain": "AJ",
@@ -115,10 +129,12 @@ var textCandidats = {
 	"MARCHANDISE Charlotte": "CM",
 	"MARTINEZ Jean-Claude": "JCM",
 	"MELENCHON Jean-Luc": "JLM",
+	"MESSAOUDI Kamel": "KM",
 	"MIGUET Nicolas": "NM",
 	"MILLO Jean-Luc": "JM",
 	"MUMBACH Paul": "PM",
 	"NIKONOFF Jacques": "JN",
+	"PASSERIEUX Régis": "RP",
 	"POUTOU Philippe": "PP",
 	"REGIS Olivier": "OR",
 	"TAUZIN Didier": "DT",
@@ -334,6 +350,7 @@ $(document).ready(function() {
 
     var markers = [];
     var nameList = [];
+    var parrainagesCount = {};
     var parrainages = {};
 
     $.getJSON('./data.json', function(data) {
@@ -343,6 +360,7 @@ $(document).ready(function() {
         	var candidatCategory = categoriesCandidats[candidatName] || 0;
 
         	nameList.push(candidatName);
+        	parrainagesCount[candidatName] = candidat.Parrainages.length;
 
         	candidat.Parrainages.forEach(function(parrainage) {
         		//console.log(parrainage, parrainage.location);
@@ -543,7 +561,9 @@ $(document).ready(function() {
 
 		importantCandidats.forEach(function(candidat) {
 			var candidatButton = document.createElement("a");
-			candidatButton.appendChild(document.createTextNode(candidat));
+			candidatButton.appendChild(document.createTextNode(
+				candidat + " (" + parrainagesCount[candidat] + ")"
+				));
 			candidatButton.setAttribute("href", "#");
 			if (candidat === 'Autres') {
 				candidatButton.style.background = colours[0];
