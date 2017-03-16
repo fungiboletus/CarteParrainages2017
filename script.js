@@ -439,7 +439,7 @@ $(document).ready(function() {
 
 		function filterMap(name) {
 
-			document.getElementById("search").style.display = name ? 'inline-block' : 'none';
+			document.getElementById("clear").style.display = name ? 'inline-block' : 'none';
 			map.closePopup();
 			if (name === 'Autres') {
 				var bounds = new L.LatLngBounds();
