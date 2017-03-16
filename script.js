@@ -320,8 +320,7 @@ $(document).ready(function() {
     	'Données du <a href="https://presidentielle2017.conseil-constitutionnel.fr/">Conseil Constitutionnel</a>'
     }).addTo(map);
 
-    var leafletView = new PruneClusterForLeaflet();
-    leafletView.Cluster.Size = 180;
+    var leafletView = new PruneClusterForLeaflet(75, 25);
 
     leafletView.BuildLeafletClusterIcon = function(cluster) {
         var e = new L.Icon.MarkerCluster();
