@@ -321,7 +321,7 @@ $(document).ready(function() {
     }).addTo(map);
 
     var leafletView = new PruneClusterForLeaflet();
-    leafletView.Cluster.Size = 120;
+    leafletView.Cluster.Size = 180;
 
     leafletView.BuildLeafletClusterIcon = function(cluster) {
         var e = new L.Icon.MarkerCluster();
