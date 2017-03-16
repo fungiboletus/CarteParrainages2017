@@ -293,7 +293,16 @@ $(document).ready(function() {
 				options.paddingBottomRight = paddingBottomRight;
 			}
 		}
-		map.oldFitBounds(bounds, options);
+		var target = this._getBoundsCenterZoom(bounds, options);
+		var targetNoPadding = this._getBoundsCenterZoom(bounds, {});
+		var currentZoom = map.getZoom();
+
+		if (target.zoom === currentZoom && targetNoPadding !== currentZoom) {
+			map.setView(targetNoPadding.center, targetNoPadding.zoom, options);
+		} else {
+			map.setView(target.center, target.zoom, options);
+		}
+		//map.oldFitBounds(bounds, options);
 		return this;
 	};
 
