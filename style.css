@@ -125,7 +125,7 @@ padding: 20px;
 		display:inline-block;
 	}
 
-	.hide-candidats .candidats {
+	#suggestions.hide-candidats .candidat-button {
 		display:none;
 	}
 
