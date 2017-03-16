@@ -561,14 +561,15 @@ $(document).ready(function() {
 
 		importantCandidats.forEach(function(candidat) {
 			var candidatButton = document.createElement("a");
-			candidatButton.appendChild(document.createTextNode(
-				candidat + " (" + parrainagesCount[candidat] + ")"
-				));
 			candidatButton.setAttribute("href", "#");
 			if (candidat === 'Autres') {
 				candidatButton.style.background = colours[0];
+				candidatButton.appendChild(document.createTextNode('Autres'));
 			} else {
 				candidatButton.style.background = colours[categoriesCandidats[candidat]];
+				candidatButton.appendChild(document.createTextNode(
+					candidat + " (" + parrainagesCount[candidat] + ")"
+					));
 			}
 			candidatButton.addEventListener("click", function(e) {
 				e.preventDefault();
