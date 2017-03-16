@@ -101,9 +101,11 @@ background: rgba(255,255,255,0.666);
 padding: 20px;
 }
 
-#showHideMobile {
+#suggestions a#showHideMobile {
 	display:none;
 }
+
+
 
 @media only screen and (max-width: 800px) {
 	h1 {
