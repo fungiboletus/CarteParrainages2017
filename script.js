@@ -577,6 +577,8 @@ $(document).ready(function() {
 		searchInput.addEventListener("awesomplete-selectcomplete", function() {
 			filterMap(searchInput.value);
 		});
+		document.getElementById("clear").style.display = 
+			searchInput.value ? 'inline-block' : 'none';
 
 		importantCandidats.forEach(function(candidat) {
 			var candidatButton = document.createElement("a");
