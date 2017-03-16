@@ -429,7 +429,17 @@ $(document).ready(function() {
 
 	    map.addLayer(leafletView);
 
+		var setHideShowMobile = function() {
+			if (document.body.clientWidth <= 800) {
+				hideCandidats();
+			} else {
+				showCandidats();
+			}
+		} 
+
 		function filterMap(name) {
+
+			document.getElementById("search").style.display = name ? 'inline-block' : 'none';
 			map.closePopup();
 			if (name === 'Autres') {
 				var bounds = new L.LatLngBounds();
@@ -570,6 +580,7 @@ $(document).ready(function() {
 
 		importantCandidats.forEach(function(candidat) {
 			var candidatButton = document.createElement("a");
+			candidatButton.className = "candidat-button";
 			candidatButton.setAttribute("href", "#");
 			if (candidat === 'Autres') {
 				candidatButton.style.background = colours[0];
@@ -583,6 +594,7 @@ $(document).ready(function() {
 			candidatButton.addEventListener("click", function(e) {
 				e.preventDefault();
 				searchInput.value = candidat;
+				setHideShowMobile();
 				filterMap(candidat);
 			});
 			suggestions.appendChild(candidatButton);
@@ -593,7 +605,34 @@ $(document).ready(function() {
 			e.preventDefault();
 			searchInput.value = '';
 			searchInput.focus();
+			setHideShowMobile();
 			filterMap();
+		});
+
+		var showHideMobile = document.getElementById("showHideMobile");
+
+		var showCandidats = function() {
+			suggestions.className = "";
+			showHideMobile.firstChild.data = "Masquer candidats";
+			showingCandidats = true;
+		};
+
+		var hideCandidats = function() {
+			suggestions.className = "hide-candidats";
+			showHideMobile.firstChild.data = "Candidats";
+			showingCandidats = false;
+		};
+
+		setHideShowMobile();
+
+		$(window).resize(setHideShowMobile());
+		showHideMobile.addEventListener("click", function(e) {
+			e.preventDefault();
+			if (showingCandidats) {
+				hideCandidats();	
+			} else {
+				showCandidats();
+			}
 		});
 
 		suggestions.style.display='block';

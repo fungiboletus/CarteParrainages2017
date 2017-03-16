@@ -101,6 +101,10 @@ background: rgba(255,255,255,0.666);
 padding: 20px;
 }
 
+#showHideMobile {
+	display:none;
+}
+
 @media only screen and (max-width: 800px) {
 	h1 {
 		font-size: 14px;
@@ -108,9 +112,21 @@ padding: 20px;
 		bottom: 50px;
 	}
 	#suggestions {
-		top:26px;
+		/*display:none;
+		/*top:26px;
 		font-size:10px;
 		width:auto;
-		right:40px;
+		right:40px;*/
+		right:10px;
+		font-size:14px;
 	}
+
+	#showHideMobile {
+		display:inline-block;
+	}
+
+	.hide-candidats .candidats {
+		display:none;
+	}
+
 }
