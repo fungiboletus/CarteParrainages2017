@@ -4,11 +4,14 @@ var categoriesCandidats = {
 	"ARTHAUD Nathalie": 1,
 	"ASSELINEAU François": 2,
 	"BAROIN François": 0,
+	"BESSON Eric": 0,
 	"BLANAL Jérôme": 0,
 	"BORLOO Jean-Louis": 0,
+	"BOURIACHI Philippe": 0,
 	"CAMUS Renaud": 0,
 	"CAZENEUVE Bernard": 0,
-	"CHEMINADE Jacques": 0,
+	"CHEMINADE Jacques": 9,
+	"COHN-BENDIT Daniel": 0,
 	"DE PREVOISIN Robert": 0,
 	"DELAFON Olivier": 0,
 	"DUPONT-AIGNAN Nicolas": 3,
@@ -25,10 +28,16 @@ var categoriesCandidats = {
 	"HOLLANDE François": 0,
 	"JADOT Yannick": 0,
 	"JARDIN Alexandre": 0,
+	"JOSPIN Lionel": 0,
 	"JUPPE Alain": 0,
+	"KANNER Patrick": 0,
+	"KOSCIUSKO-MORIZET Nathalie": 0,
+	"LAINE Camille": 0,
 	"LARROUTUROU Pierre": 0,
-	"LASSALLE Jean": 0,
+	"LASSALLE Jean": 10,
 	"LE PEN Marine": 6,
+	"LEMAIRE Bruno": 0,
+	"LEVACHER Jean-Michel": 0,
 	"MACRON Emmanuel": 7,
 	"MARCHANDISE Charlotte": 0,
 	"MARTINEZ Jean-Claude": 0,
@@ -36,10 +45,12 @@ var categoriesCandidats = {
 	"MESSAOUDI Kamel": 0,
 	"MIGUET Nicolas": 0,
 	"MILLO Jean-Luc": 0,
+	"MORIN Hervé": 0,
+	"MOURGUY Alain": 0,
 	"MUMBACH Paul": 0,
 	"NIKONOFF Jacques": 0,
 	"PASSERIEUX Régis": 0,
-	"POUTOU Philippe": 0,
+	"POUTOU Philippe": 11,
 	"REGIS Olivier": 0,
 	"TAUZIN Didier": 0,
 	"TEMARU Oscar": 0,
@@ -48,6 +59,7 @@ var categoriesCandidats = {
 	"TROADEC Christian": 0,
 	"VERGNE Michel": 0,
 	"WAECHTER Antoine": 0,
+	"WAUQUIEZ Laurent": 0,
 	"YADE Rama": 0
 };
 
@@ -61,15 +73,10 @@ var importantCandidats = [
 	"HAMON Benoît",
 	"LE PEN Marine",
 	"MACRON Emmanuel",
-
 	"MELENCHON Jean-Luc",
-
 	"CHEMINADE Jacques",
-	"JUPPE Alain",
 	"LASSALLE Jean",
 	"POUTOU Philippe",
-	"YADE Rama",
-
 	"Autres"
 ];
 
@@ -92,7 +99,15 @@ var colours = [
 	// Emmanuel Macron (rose ou bleu clair, choix difficile => violet (mix bleu et rouge) après remarques utilisateurs)
 	'#bd008c',
 	// Jean-Luc Mélenchon (rouge pas trop agressif)
-	'#c9462c'];
+	'#c9462c',
+	// Jacques Cheminade (jaune, démarcation dans leur css, mais en plus sombre)
+	'#daab08',
+	// Jean Lassale (gris bleu vert)
+	'#81a0ab',
+	// Philippe Poutou (rouge)
+	'#c0081f',
+
+];
 var pi2 = Math.PI * 2;
 
 var textCandidats = {
@@ -100,11 +115,14 @@ var textCandidats = {
 	"ARTHAUD Nathalie": "NA",
 	"ASSELINEAU François": "FA",
 	"BAROIN François": "FB",
+	"BESSON Eric": "EB",
 	"BLANAL Jérôme": "JB",
 	"BORLOO Jean-Louis": "JLB",
+	"BOURIACHI Philippe": "PB",
 	"CAMUS Renaud": "RC",
 	"CAZENEUVE Bernard": "BC",
 	"CHEMINADE Jacques": "JC",
+	"COHN-BENDIT Daniel": "DCB",
 	"DE PREVOISIN Robert": "RDP",
 	"DELAFON Olivier": "OD",
 	"DUPONT-AIGNAN Nicolas": "NDA",
@@ -121,10 +139,16 @@ var textCandidats = {
 	"HOLLANDE François": "FH",
 	"JADOT Yannick": "YJ",
 	"JARDIN Alexandre": "AJA",
+	"JOSPIN Lionel": "LJ",
 	"JUPPE Alain": "AJ",
+	"KANNER Patrick": "PK",
+	"KOSCIUSKO-MORIZET Nathalie": "NKM",
+	"LAINE Camille": "CL",
 	"LARROUTUROU Pierre": "PL",
 	"LASSALLE Jean": "JL",
 	"LE PEN Marine": "MLP",
+	"LEMAIRE Bruno": "BL",
+	"LEVACHER Jean-Michel": "JML",
 	"MACRON Emmanuel": "EM",
 	"MARCHANDISE Charlotte": "CM",
 	"MARTINEZ Jean-Claude": "JCM",
@@ -132,6 +156,8 @@ var textCandidats = {
 	"MESSAOUDI Kamel": "KM",
 	"MIGUET Nicolas": "NM",
 	"MILLO Jean-Luc": "JM",
+	"MORIN Hervé": "HM",
+	"MOURGUY Alain": "AM",
 	"MUMBACH Paul": "PM",
 	"NIKONOFF Jacques": "JN",
 	"PASSERIEUX Régis": "RP",
@@ -144,6 +170,7 @@ var textCandidats = {
 	"TROADEC Christian": "CT",
 	"VERGNE Michel": "MV",
 	"WAECHTER Antoine": "AW",
+	"WAUQUIEZ Laurent": "LW",
 	"YADE Rama": "RY"
 };
 
@@ -310,7 +337,6 @@ $(document).ready(function() {
 		paddingTopLeft.y = $('#suggestions').height() + 50;
 		paddingBottomRight.y = $('h1').height() + 50;
 	};
-	console.log(paddingTopLeft);
 	$(window).resize(setMargin);
 
     //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -606,7 +632,10 @@ $(document).ready(function() {
 		document.getElementById("clear").addEventListener("click", function(e) {
 			e.preventDefault();
 			searchInput.value = '';
-			searchInput.focus();
+			// Don't focus on small screens (mobile)
+			if (document.body.clientWidth > 800) {
+				searchInput.focus();
+			}
 			setHideShowMobile();
 			filterMap();
 		});
