@@ -614,9 +614,10 @@ $(document).ready(function() {
 				candidatButton.style.background = colours[0];
 				candidatButton.appendChild(document.createTextNode('Autres'));
 			} else {
+				var candidatName = candidat.match(/(.+)\s([^\s]+)$/);
 				candidatButton.style.background = colours[categoriesCandidats[candidat]];
 				candidatButton.appendChild(document.createTextNode(
-					candidat + " (" + parrainagesCount[candidat] + ")"
+					candidatName[2] + " " + candidatName[1] + " (" + parrainagesCount[candidat] + ")"
 					));
 			}
 			candidatButton.addEventListener("click", function(e) {

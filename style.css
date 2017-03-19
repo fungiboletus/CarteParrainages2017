@@ -22,12 +22,13 @@ div.awesomplete {
 	position: absolute;
 	left: 55px;
 	top: 10px;
-	right: 10%;
+	right: 20%;
 	z-index: 10000;
 }
 
 .awesomplete input {
-	width: 80%;
+	width: 100%;
+	box-sizing: border-box;
 	padding: 0.3em 0.8em;
 	border: 0;
 	background: white;
@@ -69,7 +70,7 @@ left: 55px;
 color: #fff;
 font-size: 12px;
 padding: 3px 4px;
-	width: 70%;
+	right: 20%;
 }
 
 
@@ -105,13 +106,27 @@ padding: 20px;
 	display:none;
 }
 
-
+#clear_search_button {
+float: right;
+background: black;
+margin-left: 4px;
+margin-right: -4px;
+line-height: 36px;
+padding: 0px 4px;
+}
 
 @media only screen and (max-width: 800px) {
 	h1 {
 		font-size: 14px;
 		padding: 4px 10px;
 		bottom: 50px;
+	}
+	#clear_search_button {
+	float: right;
+	background: black;
+	margin-left: 0;
+	line-height: initial;
+	padding: 0;
 	}
 	#suggestions {
 		/*display:none;
