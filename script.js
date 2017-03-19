@@ -68,14 +68,14 @@ var categoriesCandidats = {
 var importantCandidats = [
 	"ARTHAUD Nathalie",
 	"ASSELINEAU François",
+	"CHEMINADE Jacques",
 	"DUPONT-AIGNAN Nicolas",
 	"FILLON François",
 	"HAMON Benoît",
+	"LASSALLE Jean",
 	"LE PEN Marine",
 	"MACRON Emmanuel",
 	"MELENCHON Jean-Luc",
-	"CHEMINADE Jacques",
-	"LASSALLE Jean",
 	"POUTOU Philippe",
 	"Autres"
 ];
@@ -92,8 +92,8 @@ var colours = [
 	'#54a0d4',
 	// François Fillon le rebel (bleu marine)
 	'#23408f',
-	// Benoît Hamont (vert clair. Seconde couleur, le rouge étant populaire) test en rose
-	'#eb1e4f',
+	// Benoît Hamont (rose clair, pas officiel mais plus de contraste)
+	'#ff2e61',
 	// Marine Le Pen (bleu marine comme Fillon :) )
 	'#000042',
 	// Emmanuel Macron (rose ou bleu clair, choix difficile => violet (mix bleu et rouge) après remarques utilisateurs)
@@ -104,8 +104,8 @@ var colours = [
 	'#daab08',
 	// Jean Lassale (gris bleu vert)
 	'#81a0ab',
-	// Philippe Poutou (rouge)
-	'#c0081f',
+	// Philippe Poutou (bordeaux car rouge déjà pris par Nathalie Arthaud)
+	'#950013',
 
 ];
 var pi2 = Math.PI * 2;
