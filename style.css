@@ -22,12 +22,13 @@ div.awesomplete {
 	position: absolute;
 	left: 55px;
 	top: 10px;
-	right: 10%;
+	right: 20%;
 	z-index: 10000;
 }
 
 .awesomplete input {
-	width: 80%;
+	width: 100%;
+	box-sizing: border-box;
 	padding: 0.3em 0.8em;
 	border: 0;
 	background: white;
@@ -67,19 +68,24 @@ z-index: 9990;
 top: 29px;
 left: 55px;
 color: #fff;
-background: #3e587e;
-border-radius: 4px;
 font-size: 12px;
-padding: 3px 8px;
-	width: 70%;
+padding: 3px 4px;
+	right: 20%;
 }
 
 
 #suggestions a {
-	color:white;
+	color: white;
+text-decoration: none;
+padding: 2px 4px;
+display: inline-block;
+margin: 1px 0px;
+background: black;
 }
 #suggestions a:hover {
-	color:#f90000;
+	color:#ddd;
+
+text-decoration: underline;
 }
 
 #loadingText {
@@ -96,16 +102,111 @@ background: rgba(255,255,255,0.666);
 padding: 20px;
 }
 
+#suggestions a#showHideMobile {
+	display:none;
+}
+
+/*#suggestions a#clear {
+float: right;
+background: black;
+margin-left: 4px;
+margin-right: -4px;
+line-height: 36px;
+padding: 0px 4px;
+}*/
+
+#advanced_candidats {
+	position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 10000;
+    padding: 1em;
+}
+#advanced_candidats fieldset {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+    border: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 1.8em;
+    bottom: 40px;
+    background: white;
+    overflow: auto;
+}
+.advanced_candidats_actions {
+	position: absolute;
+	text-align: right;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:0.5em;
+}
+.advanced_candidats_actions a {
+	margin-right: 0.5em;
+	color: grey;
+}
+.candidat_checkbox {
+	color: white;
+	display: flex;
+	padding: 3px 9px 3px 4px;
+}
+.candidat_checkbox label {
+	margin-left: 5px;
+	flex-grow:1;
+}
+
+.candidat_checkbox:nth-child(2n+1) {
+    background: #7a7a7a;
+}
+.candidat_checkbox {
+    background: #898989;
+}
+
 @media only screen and (max-width: 800px) {
 	h1 {
 		font-size: 14px;
 		padding: 4px 10px;
 		bottom: 50px;
 	}
+	.advanced_candidats input[type="checkbox"] {
+	    margin-top: 0.75em;
+	}
+	.candidat_checkbox {
+	    line-height: 2em;
+	}
+	/*#suggestions a#clear {
+	background: black;
+	padding: 0;
+	float: left;
+    line-height: 40px;
+    margin: 1px 3px;
+    margin-left: 0;
+	}*/
 	#suggestions {
-		top:26px;
+		/*display:none;
+		/*top:26px;
 		font-size:10px;
 		width:auto;
-		right:40px;
+		right:40px;*/
+		right:10px;
+		font-size:14px;
+	}
+
+	#suggestions a#showHideMobile {
+		display:inline-block;
+	}
+
+	#suggestions.hide-candidats .candidat-button {
+		display:none;
+	}
+
+	#advanced_candidats fieldset {
+		flex-wrap: nowrap;
 	}
 }
