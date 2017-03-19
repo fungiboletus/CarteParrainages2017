@@ -26,9 +26,19 @@
 <h1>Carte des parrainages - Élection présidentielle française de 2017</h1>
 <div id="map"></div>
 <input id="search-input" tabindex="1" placeholder="Recherchez un candidat ou un parrainage" type="text"/>
-<p id="suggestions">
+<p id="suggestions" style="display:none">
     <a href="#" id="showHideMobile">Candidats</a>
-    <strong id="clear_search_button"><a href="#" id="clear">Effacer recherche</a></strong>
+    <a href="#" id="clear">Réinitialiser</a>
+    <a href="#" id="advanced">Recherche avancée</a>
 </p>
+<form id="advanced_candidats" style="display:none">
+    <fieldset id="advanced_candidats_list">
+    </fieldset>
+    <div class="advanced_candidats_actions">
+        <a href="#" id="close_advanced">Fermer</a>
+        <input type="reset" value="Réinitaliser" />
+        <input type="submit" value="Valider" />
+    </div>
+</form>
 </body>
 </html>

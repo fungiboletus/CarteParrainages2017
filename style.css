@@ -106,13 +106,66 @@ padding: 20px;
 	display:none;
 }
 
-#clear_search_button {
+/*#suggestions a#clear {
 float: right;
 background: black;
 margin-left: 4px;
 margin-right: -4px;
 line-height: 36px;
 padding: 0px 4px;
+}*/
+
+#advanced_candidats {
+	position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 10000;
+    padding: 1em;
+}
+#advanced_candidats fieldset {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+    border: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 1.8em;
+    bottom: 40px;
+    background: white;
+    overflow: auto;
+}
+.advanced_candidats_actions {
+	position: absolute;
+	text-align: right;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:0.5em;
+}
+.advanced_candidats_actions a {
+	margin-right: 0.5em;
+	color: grey;
+}
+.candidat_checkbox {
+	color: white;
+	display: flex;
+	padding: 3px 9px 3px 4px;
+}
+.candidat_checkbox label {
+	margin-left: 5px;
+	flex-grow:1;
+}
+
+.candidat_checkbox:nth-child(2n+1) {
+    background: #7a7a7a;
+}
+.candidat_checkbox {
+    background: #898989;
 }
 
 @media only screen and (max-width: 800px) {
@@ -121,13 +174,20 @@ padding: 0px 4px;
 		padding: 4px 10px;
 		bottom: 50px;
 	}
-	#clear_search_button {
-	float: right;
-	background: black;
-	margin-left: 0;
-	line-height: initial;
-	padding: 0;
+	.advanced_candidats input[type="checkbox"] {
+	    margin-top: 0.75em;
 	}
+	.candidat_checkbox {
+	    line-height: 2em;
+	}
+	/*#suggestions a#clear {
+	background: black;
+	padding: 0;
+	float: left;
+    line-height: 40px;
+    margin: 1px 3px;
+    margin-left: 0;
+	}*/
 	#suggestions {
 		/*display:none;
 		/*top:26px;
@@ -146,4 +206,7 @@ padding: 0px 4px;
 		display:none;
 	}
 
+	#advanced_candidats fieldset {
+		flex-wrap: nowrap;
+	}
 }

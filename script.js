@@ -66,17 +66,17 @@ var categoriesCandidats = {
 // Candidats with enough parrainages and others
 // 
 var importantCandidats = [
-	"ARTHAUD Nathalie",
-	"ASSELINEAU François",
-	"CHEMINADE Jacques",
-	"DUPONT-AIGNAN Nicolas",
 	"FILLON François",
 	"HAMON Benoît",
-	"LASSALLE Jean",
-	"LE PEN Marine",
 	"MACRON Emmanuel",
 	"MELENCHON Jean-Luc",
+	"LASSALLE Jean",
+	"DUPONT-AIGNAN Nicolas",
+	"ARTHAUD Nathalie",
+	"LE PEN Marine",
+	"ASSELINEAU François",
 	"POUTOU Philippe",
+	"CHEMINADE Jacques",
 	"Autres"
 ];
 
@@ -293,7 +293,7 @@ $(document).ready(function() {
 	document.body.appendChild(loadingText);
 
 	var suggestions = document.getElementById("suggestions");
-	suggestions.style.display='none';
+	//suggestions.style.display='none';
 
 	var defaultView = L.latLng(46.603354, 1.888335);
 	var defaultZoom = 2;
@@ -406,7 +406,14 @@ $(document).ready(function() {
         		if (!location) return;
 
         		var name = parrainage["Nom"] + " " + parrainage["Prénom"];
-        		nameList.push(name);
+        		if (categoriesCandidats.hasOwnProperty(name)) {
+        			if (name === candidatName)
+        			{
+	        			console.log(name + " s'est auto-parrainé-e");
+        			}
+        		} else {
+	        		nameList.push(name);
+        		}
 
         		parrainages[name] = parrainage;
 
@@ -465,7 +472,7 @@ $(document).ready(function() {
 
 		function filterMap(name) {
 
-			document.getElementById("clear").style.display = name ? 'inline-block' : 'none';
+			//document.getElementById("clear").style.display = name ? 'inline-block' : 'none';
 			map.closePopup();
 			if (name === 'Autres') {
 				var bounds = new L.LatLngBounds();
@@ -480,13 +487,41 @@ $(document).ready(function() {
 				leafletView.ProcessView();
 				//map.setView(defaultView, defaultZoom);
 				map.fitBounds(bounds);
+				return;
 			}
+
+			if (name && !Array.isArray(name) && name.indexOf(" ET ") !== -1) {
+				name = name.split(" ET ");
+			}
+
+			// Is it a list of candidats ?
+			var isArray = Array.isArray(name);
+
+			var onlyCandidats = true;
+			if (isArray) {
+				name.forEach(function(candidat) {
+					if (!categoriesCandidats.hasOwnProperty(candidat)) {
+						onlyCandidats = false;
+					}
+				});
+				if (!onlyCandidats) {
+					alert("Il n'est pas possible de rechercher une liste de parraineuses.");
+					return;
+				}
+			} else {
+				onlyCandidats = categoriesCandidats.hasOwnProperty(name); 
+			}
+
 			// If it's a candidate
-			else if (categoriesCandidats.hasOwnProperty(name)) {
+			if (onlyCandidats) {
 				var bounds = new L.LatLngBounds();
 				// We only display the markers related to the candidate
 				for (var i = 0, l = markers.length; i < l; ++i) {
-					var isForCandidate = markers[i].data.candidat === name;
+					var isForCandidate = isArray ?
+						(name.indexOf(markers[i].data.candidat) !== -1)
+						:
+						(markers[i].data.candidat === name);
+
 					markers[i].filtered = !isForCandidate;
 					if (isForCandidate) {
 						bounds.extend(new L.LatLng(markers[i].position.lat, markers[i].position.lng))
@@ -494,49 +529,45 @@ $(document).ready(function() {
 				}
 				leafletView.ProcessView();
 				//map.setView(defaultView, defaultZoom);
-				console.log(bounds);
-				map.fitBounds(bounds, {
-					padding: [100, 100]
-				});
-			} else {
-				var candidateFound = false;
-				// If it's just a parrainage, we display everything and zoom to the parainage area
-				// and we open a popup
-				for (var i = 0, l = markers.length; i < l; ++i) {
-					markers[i].filtered = false;
-					if (markers[i].data.name === name) {
-						var parrainage = parrainages[markers[i].data.name];
-						if (!parrainage) {
-							alert(name + " a parrainé-e "+markers[i].data.candidat);
-							continue;
-						}
-						candidateFound = true;
-
-						map.fitBounds([
-							[
-								parrainage.location.mapView.TopLeft.Latitude,
-								parrainage.location.mapView.TopLeft.Longitude
-							],
-							[
-								parrainage.location.mapView.BottomRight.Latitude,
-								parrainage.location.mapView.BottomRight.Longitude
-							]
-						]);
-
-						map.openPopup(markers[i].data.popup, [
-							parrainage.location.lat,
-							parrainage.location.lon
-						], popupOptions);
-						//console.log()
-					}
-				}
-				/*if (!candidateFound) {
-					map.setView(defaultView, defaultZoom);
-				}*/
-				leafletView.ProcessView();
+				map.fitBounds(bounds);
+				return;
 			}
 
+			var candidateFound = false;
+			// If it's just a parrainage, we display everything and zoom to the parainage area
+			// and we open a popup
+			for (var i = 0, l = markers.length; i < l; ++i) {
+				markers[i].filtered = false;
+				if (markers[i].data.name === name) {
+					var parrainage = parrainages[markers[i].data.name];
+					if (!parrainage) {
+						alert(name + " a parrainé-e "+markers[i].data.candidat);
+						continue;
+					}
+					candidateFound = true;
 
+					map.fitBounds([
+						[
+							parrainage.location.mapView.TopLeft.Latitude,
+							parrainage.location.mapView.TopLeft.Longitude
+						],
+						[
+							parrainage.location.mapView.BottomRight.Latitude,
+							parrainage.location.mapView.BottomRight.Longitude
+						]
+					]);
+
+					map.openPopup(markers[i].data.popup, [
+						parrainage.location.lat,
+						parrainage.location.lon
+					], popupOptions);
+					//console.log()
+				}
+			}
+			if (!candidateFound) {
+				map.setView(defaultView, defaultZoom);
+			}
+			leafletView.ProcessView();
 
 		};
 
@@ -592,10 +623,17 @@ $(document).ready(function() {
 
 		searchInput.addEventListener('keyup', function (e) {
 		    if (e.keyCode == 13) {
-		    	//searchInput.blur();
-		    	if (!parrainages.hasOwnProperty(searchInput.value) && firstResult) {
-			    	searchInput.value = firstResult;
+			    searchInput.blur();
+		    	if (searchInput.value.indexOf(" ET ") !== -1) {
 			    	filterMap(searchInput.value);
+			    	return;
+		    	}
+
+		    	if (parrainages.hasOwnProperty(searchInput.value)) {
+			    	filterMap(searchInput.value);
+		    	} else if(firstResult){
+			    	searchInput.value = firstResult;
+			    	filterMap(firstResult);
 		    	}
 		    }
 		});
@@ -603,8 +641,8 @@ $(document).ready(function() {
 		searchInput.addEventListener("awesomplete-selectcomplete", function() {
 			filterMap(searchInput.value);
 		});
-		document.getElementById("clear").style.display = 
-			searchInput.value ? 'inline-block' : 'none';
+		/*document.getElementById("clear").style.display = 
+			searchInput.value ? 'inline-block' : 'none';*/
 
 		importantCandidats.forEach(function(candidat) {
 			var candidatButton = document.createElement("a");
@@ -630,6 +668,62 @@ $(document).ready(function() {
 			suggestions.appendChild(document.createTextNode(" "));
 		});
 
+		// Sort candidats by parrainages count
+		var candidatsOrdered = [];
+		for (var i in parrainagesCount) {
+			candidatsOrdered.push([i, parrainagesCount[i]]);
+		}
+
+		candidatsOrdered = candidatsOrdered.sort(function(a, b) {
+			return b[1] === a[1] ? 
+				(a[0] > b[0] ? 1 : -1) :
+				(b[1] - a[1]); 
+		});
+
+		var formAdvancedCandidats = document.getElementById("advanced_candidats");
+		var listAdvancedCandidats = document.getElementById("advanced_candidats_list");
+
+		candidatsOrdered.forEach(function(candidat) {
+			var candidatSpan = document.createElement("span");
+			candidatSpan.className = "candidat_checkbox";
+			var candidatCategory = categoriesCandidats[candidat[0]];
+			if (candidatCategory !== 0) {
+				candidatSpan.style.background = colours[candidatCategory];
+			}
+			var candidatInput = document.createElement("input");
+			candidatInput.value = candidat[0];
+			candidatInput.id = "form_candidat_"+window.encodeURIComponent(candidat[0]);
+			candidatInput.setAttribute("type", "checkbox");
+			candidatInput.setAttribute("name", candidatInput.id);
+			var candidatLabel = document.createElement("label");
+			candidatLabel.setAttribute("for", candidatInput.id);
+			var candidatName = candidat[0].match(/(.+)\s([^\s]+)$/);
+			candidatLabel.appendChild(document.createTextNode(
+				candidatName[2] + " " + candidatName[1] + " (" + candidat[1] + ")"
+			));
+			candidatSpan.appendChild(candidatInput);
+			candidatSpan.appendChild(candidatLabel);
+			listAdvancedCandidats.appendChild(candidatSpan);
+		});
+
+		formAdvancedCandidats.onsubmit = function() {
+			var query = 
+			$(formAdvancedCandidats).serializeArray()
+				.map(function(candidat) {
+					return candidat.value;
+				});
+
+			searchInput.value = query.join(' ET ');
+			formAdvancedCandidats.style.display = 'none';
+			filterMap(query);
+			return false;
+		};
+
+		document.getElementById("close_advanced").addEventListener("click", function(e) {
+			e.preventDefault();
+			formAdvancedCandidats.style.display = 'none';
+		});
+
 		document.getElementById("clear").addEventListener("click", function(e) {
 			e.preventDefault();
 			searchInput.value = '';
@@ -639,6 +733,11 @@ $(document).ready(function() {
 			}
 			setHideShowMobile();
 			filterMap();
+		});
+
+		document.getElementById("advanced").addEventListener("click", function(e) {
+			e.preventDefault();
+			formAdvancedCandidats.style.display = "block";
 		});
 
 		var showHideMobile = document.getElementById("showHideMobile");
